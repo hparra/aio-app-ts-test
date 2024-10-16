@@ -31,13 +31,13 @@ async function main (params) {
     logger.debug(stringParameters(params))
 
     // check for missing request input parameters and headers
-    const requiredParams = [/* add required params */]
-    const requiredHeaders = ['Authorization']
-    const errorMessage = checkMissingRequestInputs(params, requiredParams, requiredHeaders)
-    if (errorMessage) {
-      // return and log client errors
-      return errorResponse(400, errorMessage, logger)
-    }
+    // const requiredParams = [/* add required params */]
+    // const requiredHeaders = ['Authorization']
+    // const errorMessage = checkMissingRequestInputs(params, requiredParams, requiredHeaders)
+    // if (errorMessage) {
+    //   // return and log client errors
+    //   return errorResponse(400, errorMessage, logger)
+    // }
 
     // extract the user Bearer token from the Authorization header
     const token = getBearerToken(params)
