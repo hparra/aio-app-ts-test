@@ -110,6 +110,8 @@ No problems.
 
 #### Converting to ESM
 
+We converted genertic action to ESM:
+
 ```txt
 √ aio-app-ts-test (main) %  aio app dev                                                                                                                              24-10-15 17:14:14
 Building the app...
@@ -138,11 +140,11 @@ Building the app...
  ›   ]
  ```
 
- i  needeed to change `module` and `moduleResolution` to "nodenext"
+I needeed to change `module` and `moduleResolution` in tsconfig to "nodenext".
 
 #### typescript dependencies
 
-What if I add a typescript file that is importe?
+What if I add a typescript file that is imported?
 
 ```txt
  ›   Error: action build failed, webpack compilation errors:
@@ -177,7 +179,7 @@ What if I add a typescript file that is importe?
  ›   ]
  ```
 
- We needed to add the following to webpack config:
+We needed to add the following to webpack config:
 
 ```js
 module.exports = {
@@ -191,11 +193,11 @@ module.exports = {
 Now it builds.
 
 We can edit 'foo.ts' and watcher notices, but the action does not get rebuilt.
-If I do a 'fake' edit of generic.js (e.g. add a comment) it "builds" but it looks like it's really using a cached version because the change to foo.ts i not reflected.
+If I do a 'fake' edit of generic.js (e.g. add a comment) it "builds" but it looks like it's really using a cached version because the change to foo.ts is not reflected.
 
 Hmm...
 
-See `https://github.com/adobe/aio-cli-plugin-app-dev/blob/21d0f1125ef8fe7d6b3a2dd0921e4cb2eb2a7de9/src/lib/actions-watcher.js`
+See <https://github.com/adobe/aio-cli-plugin-app-dev/blob/21d0f1125ef8fe7d6b3a2dd0921e4cb2eb2a7de9/src/lib/actions-watcher.js>
 
 We see watcher is watching `config.actions.src`.
 This is the `actions` key in app.config.yaml.
@@ -216,5 +218,14 @@ If there is a boo boo then cli stops building. You have to restart:
 
 Should be handled by parcel, so there should be no issues.
 We rework App.jsx to App.tsx and utils.js to utils.ts.
-No issues other typechecking error telling us to use `--jsx`.
-This README already address this so we modify tsconfig.json accordingly.
+No issues other than typechecking error telling us to use `--jsx`.
+This README already addressed this so we modify tsconfig.json accordingly.
+
+#### Moving Forward
+
+Unfortunately people want watch and rebuild comparable to webpack and parcel.
+
+We can run webpack directly but that defeats what app dev does:
+
+- serves actions thru server (w/ ssl)
+- runs FE tool chain too (parcel)

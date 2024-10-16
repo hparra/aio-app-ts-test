@@ -59,7 +59,7 @@ async function main (params: any) {
         ...content,
         foo,
         bar,
-        message: 'dude',
+        message: 'yes',
       }
     }
 
