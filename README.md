@@ -139,3 +139,65 @@ Building the app...
  ```
 
  i  needeed to change `module` and `moduleResolution` to "nodenext"
+
+#### typescript dependencies
+
+What if I add a typescript file that is importe?
+
+```txt
+ ›   Error: action build failed, webpack compilation errors:
+ ›   [
+ ›      {
+ ›              "moduleIdentifier": "/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/index.js!/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/ac
+ ›   tions/generic/index.ts",
+ ›              "moduleName": "./actions/generic/index.ts",
+ ›              "loc": "28:14-31",
+ ›              "message": "Module not found: Error: Can't resolve '../foo' in '/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/generic'",
+ ›              "moduleId": 94763,
+ ›              "moduleTrace": [],
+ ›              "details": "resolve '../foo' in '/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/generic'\n  using description file: 
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/package.json (relative path: ./actions/generic)\n    using description file: 
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/package.json (relative path: ./actions/foo)\n      no extension\n        
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/foo doesn't exist\n      .js\n        
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/foo.js doesn't exist\n      .json\n        
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/foo.json doesn't exist\n      as directory\n        
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/foo doesn't exist",
+ ›              "stack": "ModuleNotFoundError: Module not found: Error: Can't resolve '../foo' in '/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/generic'\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/Compilation.js:2109:28\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:908:13\n    at eval (eval at create 
+ ›   (/Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:333:22\n    at eval (eval at create 
+ ›   (/Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:512:22\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:150:10\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:775:25\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:992:8\n    at 
+ ›   /Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/NormalModuleFactory.js:1121:5"
+ ›      }
+ ›   ]
+ ```
+
+ We needed to add the following to webpack config:
+
+```js
+module.exports = {
+  // ...
+  resolve: {
+    extensions: ['.ts']
+  }
+}
+```
+
+Now it builds.
+
+We can edit 'foo.ts' and watcher notices, but the action does not get rebuilt.
+If I do a 'fake' edit of generic.js (e.g. add a comment) it "builds" but it looks like it's really using a cached version because the change to foo.ts i not reflected.
+
+Hmm...
+
+See `https://github.com/adobe/aio-cli-plugin-app-dev/blob/21d0f1125ef8fe7d6b3a2dd0921e4cb2eb2a7de9/src/lib/actions-watcher.js`
+
+We see watcher is watching `config.actions.src`.
+This is the `actions` key in app.config.yaml.
+If the file is not an action it doesn't do anything.
+

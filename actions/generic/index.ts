@@ -17,6 +17,7 @@
 // const fetch = require('node-fetch')
 import { Core } from '@adobe/aio-sdk'
 import { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs } from '../utils'
+import { foo } from '../foo'
 
 // main function that will be executed by Adobe I/O Runtime
 async function main (params: any) {
@@ -53,7 +54,11 @@ async function main (params: any) {
     const content = await res.json()
     const response = {
       statusCode: 200,
-      body: content
+      body: {
+        ...content,
+        foo,
+        message: 'dude',
+      }
     }
 
     // log the response status code
