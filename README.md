@@ -201,3 +201,13 @@ We see watcher is watching `config.actions.src`.
 This is the `actions` key in app.config.yaml.
 If the file is not an action it doesn't do anything.
 
+What if add a TS file outside of that actions directory?
+
+Build works but watcher does not see.
+Not an issue now but may be in future.
+
+If there is a boo boo then cli stops building. You have to restart:
+
+```txt
+2024-10-16T21:41:47.174Z [watcher] error: Error encountered while building actions. Stopping auto refresh.
+```

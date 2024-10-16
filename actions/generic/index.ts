@@ -18,6 +18,7 @@
 import { Core } from '@adobe/aio-sdk'
 import { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs } from '../utils'
 import { foo } from '../foo'
+import { bar } from '../../lib/bar'
 
 // main function that will be executed by Adobe I/O Runtime
 async function main (params: any) {
@@ -57,6 +58,7 @@ async function main (params: any) {
       body: {
         ...content,
         foo,
+        bar,
         message: 'dude',
       }
     }
