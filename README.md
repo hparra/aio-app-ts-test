@@ -79,3 +79,31 @@ and make sure you have the below config added
     }
   } 
 ```
+
+## Typescript Support (hgpa)
+
+We are testing typescript support out of the box,
+as well as edge cases.
+
+We generated this code using `aio app init --standalone-app --no-login`.
+
+We then ran `aio app dev`.
+
+We were able to call generic action via UI.
+We modify generic action so  we can call it without auth:
+
+- `require-adobe-auth: false`
+- remove `Authorization` check
+
+### TS mods
+
+We then followed the instructions here: <https://github.com/adobe/aio-cli-plugin-app-dev>
+
+Ran `npm install --save-dev ts-loader typescript`
+
+We added the `webpack-config.js` and `tsconfig.json` files.
+
+We then ran `aio app dev`. No problem.
+
+Modified generic to be TS.
+No problems.

@@ -14,12 +14,12 @@
  */
 
 
-const fetch = require('node-fetch')
+// const fetch = require('node-fetch')
 const { Core } = require('@adobe/aio-sdk')
 const { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs } = require('../utils')
 
 // main function that will be executed by Adobe I/O Runtime
-async function main (params) {
+async function main (params: any) {
   // create a Logger
   const logger = Core.Logger('main', { level: params.LOG_LEVEL || 'info' })
 
