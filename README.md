@@ -107,3 +107,35 @@ We then ran `aio app dev`. No problem.
 
 Modified generic to be TS.
 No problems.
+
+#### Converting to ESM
+
+```txt
+√ aio-app-ts-test (main) %  aio app dev                                                                                                                              24-10-15 17:14:14
+Building the app...
+ ›   Error: action build failed, webpack compilation errors:
+ ›   [
+ ›      {
+ ›              "file": "/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/generic/index.ts",
+ ›              "loc": "18:21-37",
+ ›              "message": "\u001b[90m[tsl] \u001b[39m\u001b[1m\u001b[31mERROR\u001b[39m\u001b[22m\u001b[1m\u001b[31m in 
+ ›   \u001b[39m\u001b[22m\u001b[1m\u001b[36m/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/generic/index.ts(18,22)\u001b[39m\u001b[22m\n\u001b[1m\u001b[31m     
+ ›    TS2792: Cannot find module '@adobe/aio-sdk'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?\u001b[39m\u001b[22m",
+ ›              "details": "ts-loader-default_e3b0c44298fc1c14",
+ ›              "stack": "Error: \u001b[90m[tsl] \u001b[39m\u001b[1m\u001b[31mERROR\u001b[39m\u001b[22m\u001b[1m\u001b[31m in 
+ ›   \u001b[39m\u001b[22m\u001b[1m\u001b[36m/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/actions/generic/index.ts(18,22)\u001b[39m\u001b[22m\n\u001b[1m\u001b[31m     
+ ›    TS2792: Cannot find module '@adobe/aio-sdk'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?\u001b[39m\u001b[22m\n    
+ ›   at makeError (/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/dist/utils.js:93:19)\n    at 
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/dist/utils.js:63:27\n    at Array.map (<anonymous>)\n    at formatErrors 
+ ›   (/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/dist/utils.js:46:14)\n    at provideErrorsToWebpack 
+ ›   (/Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/dist/after-compile.js:167:62)\n    at 
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/dist/after-compile.js:36:9\n    at 
+ ›   /Users/hgpa/hgpa/git/git.corp.adobe.com/wcms/aio-app-ts-test/node_modules/ts-loader/dist/instances.js:206:13\n    at fn 
+ ›   (/Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/webpack/lib/Compilation.js:491:10)\n    at Hook.eval [as callAsync] (eval at create 
+ ›   (/Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:34:1)\n    at Hook.CALL_ASYNC_DELEGATE 
+ ›   [as _callAsync] (/Users/hgpa/.nvm/versions/node/v20.11.1/lib/node_modules/@adobe/aio-cli/node_modules/tapable/lib/Hook.js:18:14)"
+ ›      }
+ ›   ]
+ ```
+
+ i  needeed to change `module` and `moduleResolution` to "nodenext"
