@@ -211,3 +211,10 @@ If there is a boo boo then cli stops building. You have to restart:
 ```txt
 2024-10-16T21:41:47.174Z [watcher] error: Error encountered while building actions. Stopping auto refresh.
 ```
+
+#### TSX
+
+Should be handled by parcel, so there should be no issues.
+We rework App.jsx to App.tsx and utils.js to utils.ts.
+No issues other typechecking error telling us to use `--jsx`.
+This README already address this so we modify tsconfig.json accordingly.

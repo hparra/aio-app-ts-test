@@ -11,7 +11,7 @@ import ActionsForm from './ActionsForm'
 import { Home } from './Home'
 import { About } from './About'
 
-function App (props) {
+function App (props: any) {
   console.log('runtime object:', props.runtime)
   console.log('ims object:', props.ims)
 

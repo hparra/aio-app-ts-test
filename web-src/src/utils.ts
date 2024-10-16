@@ -22,7 +22,7 @@ async function actionWebInvoke (actionUrl, headers = {}, params = {}, options = 
     ...headers
   }
 
-  const fetchConfig = {
+  const fetchConfig: any = {
     headers: actionHeaders
   }
 
