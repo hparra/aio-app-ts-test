@@ -248,9 +248,32 @@ Remove `devtool: 'inline-source-map'` or use different environments.
 
 My file is still big though. Why?
 
-```
+```txt
 8.6M    dist/application/actions/aio-app-ts-test/generic-temp/index.js
 8.6M    dist/application/actions/aio-app-ts-test/generic-ts-temp/index.js
 8.9M    dist/application/actions/aio-app-ts-test/publish-events-temp/index.js
 3.5M    dist/application/web-prod/index.25c565b5.js
 ```
+
+The original commit from init with JS and require had same sizes.
+This is how big these files are?
+Something things off...
+
+SHAKE SHAKE SHAKE  
+SHAKE SHAKE SHAKE  
+Shake your booty!  
+Shake your booty!  
+
+Instead of importing all of Core why don't we just use Logger from `@adobe/aio-lib-core-logging`? Let's try:
+
+```txt
+√ aio-app-ts-test (main) % du -h dist/**/*.js
+620K    dist/application/actions/aio-app-ts-test/generic-temp/index.js
+616K    dist/application/actions/aio-app-ts-test/generic-ts-temp/index.js
+8.9M    dist/application/actions/aio-app-ts-test/publish-events-temp/index.js
+3.5M    dist/application/web-prod/index.ac8b87d0.js
+```
+
+Much better! We can't shake tree if import all of Core.
+This should be default honestly.
+Wait, why is the TS smaller than the JS?

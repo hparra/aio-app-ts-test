@@ -15,7 +15,9 @@
 
 
 // const fetch = require('node-fetch')
-import { Core } from '@adobe/aio-sdk'
+// import { Core } from '@adobe/aio-sdk'
+
+import Logger from '@adobe/aio-lib-core-logging'
 import { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs } from '../utils'
 import { foo } from '../foo'
 import { bar } from '../../lib/bar'
@@ -23,7 +25,7 @@ import { bar } from '../../lib/bar'
 // main function that will be executed by Adobe I/O Runtime
 async function main (params) {
   // create a Logger
-  const logger = Core.Logger('main', { level: params.LOG_LEVEL || 'info' })
+  const logger = Logger('main', { level: params.LOG_LEVEL || 'info' })
 
   try {
     // 'info' is the default level if not set
