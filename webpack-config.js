@@ -1,13 +1,6 @@
-const path = require('path');
-
 module.exports = {
   // context: path.resolve(__dirname),
-  devtool: 'inline-source-map',
-  entry: [
-    // FIMXE
-    './actions/generic/index.ts'
-  ],
-  mode: 'development',
+  // devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -20,11 +13,6 @@ module.exports = {
   },
   optimization: {
     minimize: false
-  },
-  output: {
-    filename: 'index.js',
-    libraryTarget: 'commonjs2',
-    path: path.resolve(__dirname, 'dist/application/actions/aio-app-ts-test/generic-temp'),
   },
   resolve: {
     extensions: [

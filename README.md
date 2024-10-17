@@ -229,3 +229,28 @@ We can run webpack directly but that defeats what app dev does:
 
 - serves actions thru server (w/ ssl)
 - runs FE tool chain too (parcel)
+
+#### My files are huge!
+
+I noticed my built files are now over twice the size they used to be.
+
+```txt
+√ aio-app-ts-test (main) % du -h dist/**/*.js
+ 22M    dist/application/actions/aio-app-ts-test/generic-temp/index.js
+ 22M    dist/application/actions/aio-app-ts-test/generic-ts-temp/index.js
+ 23M    dist/application/actions/aio-app-ts-test/publish-events-temp/index.js
+3.5M    dist/application/web-prod/index.ac8b87d0.js
+```
+
+Yikes. Simple inspection reminded us that we now have sourcemaps.
+Important to note that these were added regardless if js or ts.
+Remove `devtool: 'inline-source-map'` or use different environments.
+
+My file is still big though. Why?
+
+```
+8.6M    dist/application/actions/aio-app-ts-test/generic-temp/index.js
+8.6M    dist/application/actions/aio-app-ts-test/generic-ts-temp/index.js
+8.9M    dist/application/actions/aio-app-ts-test/publish-events-temp/index.js
+3.5M    dist/application/web-prod/index.25c565b5.js
+```
